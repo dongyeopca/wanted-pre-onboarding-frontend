@@ -7,7 +7,7 @@ function Password(props) {
   };
   return (
     <>
-      <label for="password">패스워드</label>
+      <label htmlFor="password">패스워드</label>
       <input data-testid="password-input" id="password" onChange={onChangePassword} />
     </>
   );
