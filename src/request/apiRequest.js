@@ -50,9 +50,25 @@ const updateTodo = (todo, isCompleted, id) => {
         isCompleted: isCompleted,
       },
     });
+    return result;
   } catch (error) {
     alert(error);
     throw new Error(error);
   }
 };
-export { getTodo, postTodo, updateTodo };
+
+const deleteTodo = (id) => {
+  try {
+    const result = axios({
+      method: api.deleteTodo.method,
+      url: api.updateTodo.url + `:${id}`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return result;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+export { getTodo, postTodo, updateTodo, deleteTodo };

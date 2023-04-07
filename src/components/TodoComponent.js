@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
-import { updateTodo } from '../request/apiRequest';
 
 function TodoComponent(props) {
-  const { id, userId } = props;
-  const [isCompleted, setIsCompleted] = useState(props.isCompleted);
-  const [todo, setTodo] = useState(props.todo);
-  const isCompletedChangeHandler = () => {
-    setIsCompleted((prev) => !prev);
-    updateTodo(todo, !isCompleted, id);
+  console.log(props);
+  const { id, userId, isCompleted, todo, deleteHandler, updateHandler } = props;
+  const [checkboxState, setCheckboxState] = useState(isCompleted);
+  const [text, setText] = useState(todo);
+
+  const checkboxHandler = (event) => {
+    event.preventDefault();
+    setCheckboxState((prev) => !prev);
+    updateHandler(text, !checkboxState, id);
   };
   return (
     <li>
       <label>
-        <input type="checkbox" checked={isCompleted} onChange={isCompletedChangeHandler} />
-        <span>{todo}</span>
+        <input type="checkbox" checked={checkboxState} onChange={(event) => checkboxHandler(event)} />
+        <span>{text}</span>
       </label>
       <button data-testid="modify-button">수정</button>
-      <button data-testid="delete-button">삭제</button>
+      <button data-testid="delete-button" onClick={(e) => deleteHandler(e, id)}>
+        삭제
+      </button>
     </li>
   );
 }

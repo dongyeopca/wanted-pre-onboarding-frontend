@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getTodo } from '../request/apiRequest';
+import { getTodo, updateTodo, deleteTodo } from '../request/apiRequest';
 import TodoComponent from '../components/TodoComponent';
 import AddTodoComponent from '../components/AddTodoComponent.js';
 function Todo() {
@@ -13,13 +13,25 @@ function Todo() {
       navigate('/signin');
     }
   }, [navigate]);
-  console.log('chagned');
+
   useEffect(() => {
-    (async function () {
-      const result = await getTodo();
-      setTodoList(result.data);
-    })();
+    getHandler();
   }, []);
+
+  const getHandler = async () => {
+    const result = await getTodo();
+    setTodoList(result.data);
+  };
+  const deleteHandler = async (event, id) => {
+    event.preventDefault();
+    await deleteTodo(id);
+    getHandler();
+  };
+
+  const updateHandler = async (todo, isCompleted, id) => {
+    await updateTodo(todo, isCompleted, id);
+    getHandler();
+  };
 
   return (
     <>
@@ -29,7 +41,15 @@ function Todo() {
         <ul>
           {todoList.length ? (
             todoList.map(({ id, todo, isCompleted, userId }) => (
-              <TodoComponent key={id} id={id} todo={todo} isCompleted={isCompleted} userId={userId} />
+              <TodoComponent
+                key={id}
+                id={id}
+                todo={todo}
+                isCompleted={isCompleted}
+                userId={userId}
+                deleteHandler={deleteHandler}
+                updateHandler={updateHandler}
+              />
             ))
           ) : (
             <div>None</div>
