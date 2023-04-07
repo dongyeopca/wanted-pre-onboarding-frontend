@@ -28,7 +28,9 @@ function Todo() {
       <div>
         <ul>
           {todoList.length ? (
-            todoList.map(({ id, todo, isCompleted, userId }) => <TodoComponent id={id} todo={todo} isCompleted={isCompleted} userId={userId} />)
+            todoList.map(({ id, todo, isCompleted, userId }) => (
+              <TodoComponent key={id} id={id} todo={todo} isCompleted={isCompleted} userId={userId} />
+            ))
           ) : (
             <div>None</div>
           )}

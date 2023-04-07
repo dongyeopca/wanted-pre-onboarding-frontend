@@ -35,4 +35,24 @@ const postTodo = (value) => {
     throw new Error(error);
   }
 };
-export { getTodo, postTodo };
+
+const updateTodo = (todo, isCompleted, id) => {
+  try {
+    const result = axios({
+      method: api.updateTodo.method,
+      url: api.updateTodo.url + `:${id}`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      data: {
+        todo: todo,
+        isCompleted: isCompleted,
+      },
+    });
+  } catch (error) {
+    alert(error);
+    throw new Error(error);
+  }
+};
+export { getTodo, postTodo, updateTodo };
