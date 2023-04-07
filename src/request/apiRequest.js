@@ -40,7 +40,7 @@ const updateTodo = (todo, isCompleted, id) => {
   try {
     const result = axios({
       method: api.updateTodo.method,
-      url: api.updateTodo.url + `:${id}`,
+      url: api.updateTodo.url + `${id}`,
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ const deleteTodo = (id) => {
   try {
     const result = axios({
       method: api.deleteTodo.method,
-      url: api.updateTodo.url + `:${id}`,
+      url: api.updateTodo.url + `${id}`,
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },

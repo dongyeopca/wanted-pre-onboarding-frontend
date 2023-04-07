@@ -28,7 +28,8 @@ function Todo() {
     getHandler();
   };
 
-  const updateHandler = async (todo, isCompleted, id) => {
+  const updateHandler = async (event, todo, isCompleted, id) => {
+    event.preventDefault();
     await updateTodo(todo, isCompleted, id);
     getHandler();
   };
