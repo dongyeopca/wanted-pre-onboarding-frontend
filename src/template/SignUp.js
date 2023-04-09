@@ -31,12 +31,22 @@ function Signup() {
         alert(error.response.data.message);
       });
   };
-
+  const navigateSignUp = () => {
+    navigate('/signin');
+  };
   return (
     <>
-      <Email setEmail={setEmail} />
-      <Password setPassword={setPassword} />
-      <SubmitBtn type="회원가입" email={email} password={password} eventHandler={handleSubmit} />
+      <fieldset>
+        <legend>
+          <h1>😆 회원가입</h1>
+        </legend>
+        <Email setEmail={setEmail} />
+        <Password setPassword={setPassword} />
+        <SubmitBtn type="회원가입" email={email} password={password} eventHandler={handleSubmit} />
+        <button id="navigateAuth" onClick={navigateSignUp}>
+          로그인
+        </button>
+      </fieldset>
     </>
   );
 }

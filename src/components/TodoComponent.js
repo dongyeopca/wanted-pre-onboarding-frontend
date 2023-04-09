@@ -22,7 +22,7 @@ function TodoComponent(props) {
     <li>
       <label>
         <input type="checkbox" checked={checkboxState} onChange={(event) => checkboxHandler(event)} />
-        {edit ? <input type="text" data-testid="modify-input" value={text} onChange={(e) => editTextHandler(e)} /> : <span>{todo}</span>}
+        {edit ? <input type="text" data-testid="modify-input" value={text} onChange={(e) => editTextHandler(e)} autoFocus /> : <span>{todo}</span>}
       </label>
       {edit ? (
         <button data-testid="submit-button" onClick={(e) => todoUpdateHandler(e, text, isCompleted, id)}>

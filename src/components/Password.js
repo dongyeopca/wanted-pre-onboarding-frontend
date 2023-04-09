@@ -8,7 +8,7 @@ function Password(props) {
   return (
     <>
       <label htmlFor="password">패스워드</label>
-      <input data-testid="password-input" id="password" onChange={onChangePassword} />
+      <input type="passwrod" data-testid="password-input" id="password" placeholder="********" onChange={onChangePassword} />
     </>
   );
 }

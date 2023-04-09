@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getTodo, updateTodo, deleteTodo } from '../request/apiRequest';
-import TodoComponent from '../components/TodoComponent';
+import { getTodo, postTodo, updateTodo, deleteTodo } from '../request/apiRequest';
+import TodoComponent from '../components/TodoComponent.js';
 import AddTodoComponent from '../components/AddTodoComponent.js';
 function Todo() {
   const navigate = useNavigate();
@@ -22,6 +22,14 @@ function Todo() {
     const result = await getTodo();
     setTodoList(result.data);
   };
+  const postHandler = async (event, todo, setTodo) => {
+    event.preventDefault();
+    await postTodo(todo);
+    setTodo('');
+    console.log(todo);
+    getHandler();
+  };
+
   const deleteHandler = async (event, id) => {
     event.preventDefault();
     await deleteTodo(id);
@@ -34,27 +42,31 @@ function Todo() {
     getHandler();
   };
 
+  const logoutHandler = () => {
+    localStorage.clear();
+    navigate('/signin');
+  };
+
   return (
     <>
-      <h1>Todo List</h1>
-      <AddTodoComponent setTodoList={setTodoList} />
+      <button id="logout" onClick={logoutHandler}>
+        로그아웃
+      </button>
+      <h1>😄 Todo List</h1>
+      <AddTodoComponent postHandler={postHandler} />
       <div>
         <ul>
-          {todoList.length ? (
-            todoList.map(({ id, todo, isCompleted, userId }) => (
-              <TodoComponent
-                key={id}
-                id={id}
-                todo={todo}
-                isCompleted={isCompleted}
-                userId={userId}
-                deleteHandler={deleteHandler}
-                updateHandler={updateHandler}
-              />
-            ))
-          ) : (
-            <div>None</div>
-          )}
+          {todoList?.map(({ id, todo, isCompleted, userId }) => (
+            <TodoComponent
+              key={id}
+              id={id}
+              todo={todo}
+              isCompleted={isCompleted}
+              userId={userId}
+              deleteHandler={deleteHandler}
+              updateHandler={updateHandler}
+            />
+          ))}
         </ul>
       </div>
     </>
