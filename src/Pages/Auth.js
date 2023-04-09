@@ -10,8 +10,7 @@ function Auth() {
       navigate('/todo');
     }
   }, [navigate]);
-
-  if (window.location.pathname === '/signup') {
+  if (window.location.pathname === `${process.env.PUBLIC_URL}/signup`) {
     return <SignUp />;
   }
   return <SignIn />;

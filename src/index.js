@@ -7,12 +7,15 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const router = createBrowserRouter([
-  { path: '/', element: <h1>Wanted Pre-Onboarding Intership Assignment</h1> },
-  { path: '/signup', element: <Auth /> },
-  { path: '/signin', element: <Auth /> },
-  { path: '/todo', element: <Todo /> },
-]);
+const router = createBrowserRouter(
+  [
+    { path: '/', element: <h1>Wanted Pre-Onboarding Intership Assignment</h1> },
+    { path: '/signup', element: <Auth /> },
+    { path: '/signin', element: <Auth /> },
+    { path: '/todo', element: <Todo /> },
+  ],
+  { basename: process.env.PUBLIC_URL }
+);
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
